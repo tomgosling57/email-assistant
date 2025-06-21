@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  streamlit_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8501:8501"
+    volumes:
+      - .:/app
+    env_file:
+      - ./.env
+    depends_on:
+      - qdrant
+      - email_mcp
+      - scrapeless_mcp
+
+  qdrant:
+    image: qdrant/qdrant:latest
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    volumes:
+      - qdrant_data:/qdrant/data
+
+  email_mcp:
+    build:
+      context: ./servers/email-mcp
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000" # Assuming email MCP runs on port 8000
+    volumes:
+      - ./servers/email-mcp:/app/mcp_server_email # Mount the source code
+
+  scrapeless_mcp:
+    build:
+      context: ./servers/scrapeless-mcp
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001" # Assuming scrapeless MCP runs on port 8001
+    volumes:
+      - ./servers/scrapeless-mcp:/app/mcp_server_scrapeless # Mount the source code
+
+volumes:
+  qdrant_data:
