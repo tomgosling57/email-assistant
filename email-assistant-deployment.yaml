@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: email-assistant
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: email-assistant
+  template:
+    metadata:
+      labels:
+        app: email-assistant
+    spec:
+      containers:
+      - name: email-assistant
+        image: localhost:5000/email-assistant:latest
+        ports:
+        - containerPort: 8501

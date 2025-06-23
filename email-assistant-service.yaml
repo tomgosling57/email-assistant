@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: email-assistant-service
+spec:
+  selector:
+    app: email-assistant
+  ports:
+    - protocol: TCP
+      port: 8501
+      targetPort: 8501
+      nodePort: 30000
+  type: NodePort
