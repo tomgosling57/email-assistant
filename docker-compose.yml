@@ -15,6 +15,8 @@ services:
       - qdrant
       - email_mcp
       - scrapeless_mcp
+      - mongodb
+      - flask_auth_server
 
   qdrant:
     image: qdrant/qdrant:latest
@@ -26,21 +28,53 @@ services:
 
   email_mcp:
     build:
-      context: ./servers/email-mcp
+      context: ./servers/mcp-server-email
       dockerfile: Dockerfile
     ports:
       - "8000:8000" # Assuming email MCP runs on port 8000
     volumes:
-      - ./servers/email-mcp:/app/mcp_server_email # Mount the source code
+      - ./servers/mcp-server-email:/app/mcp_server_email # Mount the source code
 
   scrapeless_mcp:
     build:
-      context: ./servers/scrapeless-mcp
+      context: ./servers/scrapeless-mcp-server
       dockerfile: Dockerfile
     ports:
       - "8001:8001" # Assuming scrapeless MCP runs on port 8001
     volumes:
-      - ./servers/scrapeless-mcp:/app/mcp_server_scrapeless # Mount the source code
+      - ./servers/scrapeless-mcp-server:/app # Mount the source code
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  mongo_mcp:
+    build:
+      context: ./servers/mongo-mcp
+      dockerfile: Dockerfile
+    ports:
+      - "8002:8002" # Assuming mongo-mcp runs on port 8002
+    environment:
+      MONGO_URI: mongodb://mongodb:27017/
+    depends_on:
+      - mongodb
+
+  flask_auth_server:
+    build:
+      context: ./servers/flask-auth-server
+      dockerfile: Dockerfile
+    ports:
+      - "5001:5000"
+    volumes:
+      - ./servers/flask-auth-server:/app
+    env_file:
+      - ./.env
+    depends_on:
+      - mongo_mcp
 
 volumes:
   qdrant_data:
+  mongodb_data:
