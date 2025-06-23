@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-auth-server
+  labels:
+    app: flask-auth-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-auth-server
+  template:
+    metadata:
+      labels:
+        app: flask-auth-server
+    spec:
+      containers:
+      - name: flask-auth-server
+        image: localhost:5000/flask-auth-server:latest # Assuming you will build and push this image
+        ports:
+        - containerPort: 5000

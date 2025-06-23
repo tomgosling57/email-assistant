@@ -1,0 +1,9 @@
+Flask==2.3.3
+Werkzeug==2.3.7
+requests==2.31.0
+Flask-Login==0.6.2
+pytest==7.4.0
+pytest-mock==3.11.1
+pytest-timeout==2.1.0
+gunicorn==21.2.0
+pymongo==4.3.3

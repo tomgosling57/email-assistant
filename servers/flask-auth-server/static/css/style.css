@@ -1,0 +1,283 @@
+/* General Body Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* More modern font */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    color: #333;
+    overflow: hidden; /* Prevent scrollbars */
+}
+
+/* Container for the entire login page */
+.login-container { /* Changed from .container to .login-container to match HTML */
+    display: flex;
+    background-color: #fff;
+    border-radius: 20px; /* Slightly more rounded corners */
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+    overflow: hidden;
+    max-width: 1000px; /* Increased max-width */
+    width: 90%;
+    min-height: 550px; /* Increased min-height */
+    animation: fadeIn 1s ease-out; /* Add a fade-in animation */
+}
+
+/* Keyframe for fade-in animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Login Image Section */
+
+/* Login Form Section */
+.login-form-section {
+    flex: 1;
+    padding: 50px; /* Increased padding */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; /* Center content horizontally */
+    text-align: center; /* Center text within the section */
+}
+
+.login-header {
+    margin-bottom: 40px; /* Increased margin */
+}
+
+.login-header h2 {
+    margin-bottom: 15px; /* Increased margin */
+    color: #333;
+    font-size: 2.5em; /* Larger heading */
+    font-weight: 700; /* Bolder font */
+}
+
+.login-header p {
+    color: #777;
+    font-size: 1em; /* Slightly larger paragraph */
+}
+
+.login-form {
+    width: 100%;
+    max-width: 350px; /* Max width for the form */
+}
+
+.form-group {
+    margin-bottom: 25px; /* Increased margin */
+    text-align: left; /* Align labels to the left */
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 10px; /* Increased margin */
+    font-weight: 600; /* Slightly bolder label */
+    color: #555;
+    font-size: 0.95em;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+    width: 100%; /* Full width */
+    padding: 14px 15px; /* Increased padding */
+    border: 1px solid #e0e0e0; /* Lighter border */
+    border-radius: 10px; /* More rounded input fields */
+    font-size: 1.05em;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+    border-color: #2575fc; /* Blue focus border */
+    box-shadow: 0 0 0 3px rgba(37, 117, 252, 0.2); /* Subtle glow on focus */
+    outline: none;
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px; /* Increased margin */
+    font-size: 0.9em;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    color: #666;
+}
+
+.remember-me input[type="checkbox"] {
+    margin-right: 8px; /* Increased margin */
+    transform: scale(1.1); /* Slightly larger checkbox */
+}
+
+.forgot-password {
+    color: #6a11cb;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.forgot-password:hover {
+    color: #2575fc; /* Change color on hover */
+    text-decoration: underline;
+}
+
+.btn-login {
+    width: 100%;
+    padding: 18px; /* Increased padding */
+    background: linear-gradient(to right, #6a11cb, #2575fc);
+    color: #fff;
+    border: none;
+    border-radius: 10px; /* More rounded button */
+    font-size: 1.2em; /* Larger font */
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+    margin-bottom: 25px; /* Increased margin */
+    letter-spacing: 0.5px;
+}
+
+.btn-login:hover {
+    transform: translateY(-3px); /* Lift effect on hover */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+}
+
+.social-login {
+    text-align: center;
+    margin-bottom: 25px; /* Increased margin */
+}
+
+.social-login p {
+    margin-bottom: 20px; /* Increased margin */
+    color: #777;
+    position: relative;
+}
+
+.social-login p::before,
+.social-login p::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 30%;
+    height: 1px;
+    background-color: #e0e0e0;
+}
+
+.social-login p::before {
+    left: 0;
+}
+
+.social-login p::after {
+    right: 0;
+}
+
+.social-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 20px; /* Increased gap */
+}
+
+.btn-social {
+    padding: 14px 30px; /* Increased padding */
+    border: 1px solid #ddd;
+    border-radius: 10px; /* More rounded buttons */
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: 600;
+    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-social.google {
+    color: #db4437; /* Google Red */
+    border-color: #db4437;
+}
+
+.btn-social.google:hover {
+    background-color: #db4437;
+    color: #fff;
+    box-shadow: 0 5px 10px rgba(219, 68, 55, 0.3);
+}
+
+.btn-social.facebook {
+    color: #4267B2; /* Facebook Blue */
+    border-color: #4267B2;
+}
+
+.btn-social.facebook:hover {
+    background-color: #4267B2;
+    color: #fff;
+    box-shadow: 0 5px 10px rgba(66, 103, 178, 0.3);
+}
+
+.signup-link {
+    text-align: center;
+    margin-top: 30px; /* Increased margin */
+    font-size: 0.95em;
+    color: #666;
+}
+
+.signup-link a {
+    color: #6a11cb;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s;
+}
+
+.signup-link a:hover {
+    color: #2575fc; /* Change color on hover */
+    text-decoration: underline;
+}
+
+/* Responsiveness */
+@media (max-width: 900px) { /* Adjusted breakpoint */
+    .login-container {
+        flex-direction: column;
+        max-width: 450px; /* Adjusted max-width for smaller screens */
+        min-height: auto;
+    }
+
+    /* For mobile devices, ensure the background image maintains its size */
+    body {
+        background-size: auto 100%; /* Maintain aspect ratio, ensure height covers */
+        /* Or, if a specific absolute size is desired for the GIF: */
+        /* background-size: 1200px auto; */ /* Example: set a fixed width */
+        /* background-size: auto 800px; */ /* Example: set a fixed height */
+        /* You might need to adjust background-position for mobile if using fixed sizes */
+    }
+
+    .login-form-section {
+        padding: 40px; /* Adjusted padding */
+    }
+}
+
+@media (max-width: 480px) {
+    .login-form-section {
+        padding: 25px;
+    }
+
+    .login-header h2 {
+        font-size: 2em;
+    }
+
+    .btn-social {
+        padding: 10px 20px;
+        font-size: 0.85em;
+    }
+}
+@media (max-width: 768px) { /* Adjust breakpoint as needed */
+    body {
+        background-size: auto 100%; /* Maintain aspect ratio, ensure height covers */
+        /* Or, if a specific absolute size is desired for the GIF: */
+        /* background-size: 1200px auto; */ /* Example: set a fixed width */
+        /* background-size: auto 800px; */ /* Example: set a fixed height */
+        /* You might need to adjust background-position for mobile if using fixed sizes */
+    }
+}
