@@ -2,11 +2,16 @@ import pymongo
 from pymongo import MongoClient
 import sys
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 print(f"Using PyMongo version: {pymongo.__version__}")
 
 try:
     # Connect using container name
-    client = MongoClient('mongodb://email-assistant-mongodb-1:27017',
+    client = MongoClient(f"mongodb://{os.environ.get('DOCKER_NAMESPACE')}-mongodb-1:27017",
                        serverSelectionTimeoutMS=5000,
                        connectTimeoutMS=10000,
                        socketTimeoutMS=10000)

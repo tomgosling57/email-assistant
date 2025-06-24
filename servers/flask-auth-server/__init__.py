@@ -1,1 +1,0 @@
-# This file makes the 'flask-auth-server' directory a Python package.

@@ -2,6 +2,11 @@ from clients.mongodb_client import MongoDBClient
 from config import Config
 from flask_login import UserMixin
 
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 class User(UserMixin):
     _mongo_client = None
 
@@ -49,14 +54,14 @@ class User(UserMixin):
     @staticmethod
     def find_by_username(username):
         from pymongo import MongoClient
-        client = MongoClient('mongodb://localhost:27017/')
+        client = MongoClient(os.environ.get('MONGO_DB_URI', 'mongodb://mongodb:27017/'))
         db = client.test_db
         return db.users.find_one({"username": username})
 
     @staticmethod
     def create(username, hashed_password):
         from pymongo import MongoClient
-        client = MongoClient('mongodb://localhost:27017/')
+        client = MongoClient(os.environ.get('MONGO_DB_URI', 'mongodb://mongodb:27017/'))
         db = client.test_db
         user_data = {"username": username, "password": hashed_password}
         return db.users.insert_one(user_data)
