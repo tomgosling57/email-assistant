@@ -1,3 +1,7 @@
 memory-bank/
 docker-compose.yml
 .continue/
+servers/flask-auth-server/__pycache__/
+servers/flask-auth-server/.vscode/
+servers/flask-auth-server/clients/__pycache__/
+servers/flask-auth-server/clients/.vscode/
