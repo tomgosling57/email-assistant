@@ -11,15 +11,33 @@ def test_successful_registration(setup_users, flask_test_client):
     username = "e2e_test_user_register"
     password = "e2e_password123"
     
-    # Ensure user does not exist from previous runs
-    flask_test_client.post("/auth/delete_user", json={"username": username})
-
     response = flask_test_client.post("/auth/register", data={
         "username": username,
         "password": password,
         "confirm_password": password
     })
-    assert response.status_code == 200
+    user = User.find_by_username(username)
+    assert user is not None # Ensure user was created in the database
+
+    assert response.status_code == 302 # Should redirect to streamlit app on success
+
+    # Retrieve flashed messages using the test client's application context
+    with flask_test_client.session_transaction() as session:
+        flashed_messages = session.get('_flashes', [])
+
+    print("Actual Flashed Messages:")
+    for category, message in flashed_messages:
+        print(f"Category: {category}, Message: {message}")
+
+    assert any("User registered successfully" in msg for msg in flashed_messages), \
+    "Expected flash message containing 'User registered successfully' not found"
+
+    
+    uri = response.headers.get("Location")  # Or response.json().get("redirect_uri")
+    expected_redirect = flask_test_client.application.url_for('auth.login')
+    assert response.headers.get("Location") == expected_redirect, f"Expected redirect to {expected_redirect}, got {response.headers.get('Location')}"        
+    # Assert that the URI ends with 'auth/login'
+    assert uri.endswith("/auth/login"), f"Expected URI to end with 'auth/login', but got: {uri}"
     assert b"Registration successful! Please log in." in response.data
 
     # Verify user can log in after registration

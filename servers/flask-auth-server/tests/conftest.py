@@ -1,9 +1,6 @@
 import pytest
 import sys
 import os
-
-
-
 from factory import create_app
 from clients.mongodb_client import MongoDBClient
 from models import User
@@ -40,3 +37,17 @@ def flask_test_client(app):
     """
     with app.test_client() as client:
         yield client
+
+@pytest.fixture
+def authenticated_user(flask_test_client):
+    """Fixture to log in a test user."""
+    # Create and log in a test user
+    User.create("test_user", "hashed_password")
+    flask_test_client.post(
+        "/auth/login",
+        data={"username": "test_user", "password": "test123"},
+        follow_redirects=True
+    )
+    yield
+    # Clean up
+    User.delete_user("test_user")
