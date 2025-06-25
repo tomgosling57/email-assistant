@@ -44,6 +44,15 @@ services:
   #   volumes:
   #     - ./servers/scrapeless-mcp-server:/app # Mount the source code
 
+  mongo-rest:
+    build: ./servers/mongo-rest
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    environment:
+      - MONGO_URI=mongodb://mongodb:27017/
+
   mongodb:
     image: mongo:latest
     ports:
@@ -51,29 +60,7 @@ services:
     volumes:
       - mongodb_data:/data/db
 
-  mongo_mcp:
-    build:
-      context: ./servers/mongo-mcp
-      dockerfile: Dockerfile
-    ports:
-      - "8002:8002" # Assuming mongo-mcp runs on port 8002
-    environment:
-      MONGO_URI: mongodb://mongodb:27017/
-    depends_on:
-      - mongodb
 
-  flask-auth-server:
-    build:
-      context: ./servers/flask-auth-server
-      dockerfile: Dockerfile
-    ports:
-      - "5001:5000"
-    volumes:
-      - ./servers/flask-auth-server:/app
-    env_file:
-      - ./.env
-    depends_on:
-      - mongo_mcp
 
 volumes:
   qdrant_data:
