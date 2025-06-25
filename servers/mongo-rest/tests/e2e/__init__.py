@@ -1,0 +1,1 @@
+# Initialize e2e tests package

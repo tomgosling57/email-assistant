@@ -1,0 +1,12 @@
+fastapi>=0.68.0
+uvicorn>=0.15.0
+pymongo>=4.0.0
+pydantic>=2.0.0,<3.0.0
+pydantic-settings>=2.0.0,<3.0.0
+
+# Testing dependencies
+pytest>=7.0.0
+httpx>=0.25.0
+pytest-mock>=3.0.0
+pytest-asyncio>=0.23.0
+testcontainers[mongodb]>=3.0.0

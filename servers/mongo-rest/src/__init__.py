@@ -1,0 +1,1 @@
+# Initialize mongo-rest package
